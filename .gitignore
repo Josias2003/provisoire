@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vercel/
+*.local
+
+# extraction working files (diagnostics only, not needed to run the app)
+extraction/screenshots/
+extraction/contact_sheets/
+extraction/__pycache__/
+
+.DS_Store

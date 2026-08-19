@@ -1,0 +1,414 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #f4f5f7;
+  color: #1a1d23;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.btn {
+  padding: 14px 18px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #d5d8de;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  color: #1a1d23;
+  transition: background 0.15s, transform 0.05s;
+}
+
+.btn:hover:not(:disabled) {
+  background: #eef0f3;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #2f6fed;
+  border-color: #2f6fed;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #255bc4;
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: #666;
+}
+
+.readiness-panel {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  border: 2px solid #e4e6ea;
+  margin-bottom: 20px;
+}
+
+.readiness-panel h2 {
+  font-size: 1rem;
+  margin: 0 0 14px;
+  color: #444;
+}
+
+.readiness-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.readiness-score {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+  flex: none;
+}
+
+.readiness-score-max {
+  font-size: 1.1rem;
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+.readiness-label {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.readiness-bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: #eef0f3;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.readiness-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s;
+}
+
+.readiness-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: #666;
+}
+
+.stats-panel {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #e4e6ea;
+}
+
+.stats-panel h2 {
+  font-size: 1rem;
+  margin: 0 0 14px;
+  color: #444;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.stat {
+  background: #f7f8fa;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.stats-footnote {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #888;
+  margin: 6px 0 0;
+}
+
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.exam-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.score-badge {
+  background: #eef0f3;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.question-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #e4e6ea;
+  margin-bottom: 16px;
+}
+
+.question-text {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 0 0 12px;
+  white-space: pre-wrap;
+}
+
+.question-image {
+  max-width: 100%;
+  border-radius: 8px;
+  display: block;
+  margin: 8px 0;
+  border: 1px solid #eaeaea;
+}
+
+.question-image-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.question-image-row .question-image {
+  max-width: 47%;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #d5d8de;
+  background: white;
+  cursor: pointer;
+  font-size: 0.98rem;
+}
+
+.option:hover:not(:disabled) {
+  border-color: #2f6fed;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option-letter {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #eef0f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.option-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.option-image {
+  max-width: 100%;
+  max-height: 140px;
+  border-radius: 6px;
+}
+
+.option-correct {
+  border-color: #1f9d55;
+  background: #eaf9ef;
+}
+
+.option-correct .option-letter {
+  background: #1f9d55;
+  color: white;
+}
+
+.option-wrong {
+  border-color: #d64545;
+  background: #fdeceb;
+}
+
+.option-wrong .option-letter {
+  background: #d64545;
+  color: white;
+}
+
+.option-disabled {
+  opacity: 0.55;
+}
+
+.exam-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  border-radius: 2px;
+  opacity: 0.95;
+  animation-name: confetti-fall;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--drift), 110vh) rotate(var(--rotate));
+    opacity: 0.4;
+  }
+}
+
+.results-page {
+  text-align: center;
+}
+
+.pass-banner {
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 4px 0 20px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.pass-banner.pass {
+  background: #eaf9ef;
+  color: #157a3d;
+  border: 1.5px solid #1f9d55;
+}
+
+.pass-banner.fail {
+  background: #fdeceb;
+  color: #a52e2e;
+  border: 1.5px solid #d64545;
+}
+
+.pass-banner-sub {
+  font-weight: 500;
+  font-size: 0.88rem;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+.score-hero {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 8px 0 2px;
+}
+
+.mode-tag {
+  color: #777;
+  margin: 0 0 20px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.results-page .stats-grid {
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 24px;
+}
+
+.review-list {
+  text-align: left;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.review-item-number {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #555;
+  margin: 18px 0 6px;
+}

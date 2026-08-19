@@ -1,0 +1,119 @@
+import { useNavigate } from 'react-router-dom'
+import { getStatsSummary, getReadiness, PASS_MARK, EXAM_TOTAL } from '../lib/history'
+import { SELECTABLE_QUESTIONS, getAllQuestions } from '../lib/examEngine'
+
+function fmtPct(v) {
+  return v == null ? '—' : `${v.toFixed(0)}%`
+}
+
+const READINESS_COLOR = {
+  Ready: '#1f9d55',
+  'Almost Ready': '#c98a12',
+  'Not Ready Yet': '#d64545',
+  'Not enough data yet': '#8a8f98',
+}
+
+export default function Dashboard() {
+  const navigate = useNavigate()
+  const stats = getStatsSummary()
+  const readiness = getReadiness()
+  const total = getAllQuestions().length
+  const selectable = SELECTABLE_QUESTIONS.length
+
+  return (
+    <div className="page dashboard">
+      <h1>PROVISOIRE EXAM SIMULATOR</h1>
+      <p className="subtitle">
+        {selectable} questions available ({total - selectable} flagged for manual review, excluded from
+        auto-selection) &middot; pass mark {PASS_MARK}/{EXAM_TOTAL}
+      </p>
+
+      <div className="menu">
+        <button className="btn btn-primary" onClick={() => navigate('/exam/exam')}>
+          Start Exam
+        </button>
+        <button className="btn" onClick={() => navigate('/exam/practice')}>
+          Practice
+        </button>
+        <button
+          className="btn"
+          onClick={() => navigate('/exam/wrong')}
+          disabled={stats.totalWrong === 0}
+        >
+          Wrong Questions
+        </button>
+      </div>
+
+      <div className="readiness-panel" style={{ borderColor: READINESS_COLOR[readiness.label] }}>
+        <h2>Exam Readiness</h2>
+        {!readiness.hasData ? (
+          <p className="stats-footnote">
+            Complete at least one <strong>Start Exam</strong> run to see your readiness score.
+          </p>
+        ) : (
+          <>
+            <div className="readiness-top">
+              <div className="readiness-score" style={{ color: READINESS_COLOR[readiness.label] }}>
+                {readiness.readinessScore}
+                <span className="readiness-score-max">/100</span>
+              </div>
+              <div>
+                <div className="readiness-label" style={{ color: READINESS_COLOR[readiness.label] }}>
+                  {readiness.label}
+                </div>
+                <div className="stats-footnote" style={{ margin: 0 }}>
+                  Based on your last {readiness.recentCount} exam{readiness.recentCount === 1 ? '' : 's'} —
+                  if you sat the real exam right now, you'd likely score around{' '}
+                  <strong>{readiness.estimatedScoreOn20}/{EXAM_TOTAL}</strong>.
+                </div>
+              </div>
+            </div>
+            <div className="readiness-bar-track">
+              <div
+                className="readiness-bar-fill"
+                style={{ width: `${readiness.readinessScore}%`, background: READINESS_COLOR[readiness.label] }}
+              />
+            </div>
+            <div className="readiness-breakdown">
+              <div>
+                Recent exam average <strong>{fmtPct(readiness.recentAvgPct)}</strong> × 50%
+              </div>
+              <div>
+                Pass-mark consistency <strong>{fmtPct(readiness.passRatePct)}</strong> × 30%
+              </div>
+              <div>
+                Question bank coverage <strong>{fmtPct(readiness.coveragePct)}</strong> × 20%
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="stats-panel">
+        <h2>Performance</h2>
+        <div className="stats-grid">
+          <div className="stat">
+            <div className="stat-label">Best Score</div>
+            <div className="stat-value">{fmtPct(stats.bestScorePct)}</div>
+          </div>
+          <div className="stat">
+            <div className="stat-label">Average Score</div>
+            <div className="stat-value">{fmtPct(stats.averageScorePct)}</div>
+          </div>
+          <div className="stat">
+            <div className="stat-label">Exams Completed</div>
+            <div className="stat-value">{stats.examsCompleted}</div>
+          </div>
+          <div className="stat">
+            <div className="stat-label">Question Accuracy</div>
+            <div className="stat-value">{fmtPct(stats.accuracyPct)}</div>
+          </div>
+        </div>
+        <p className="stats-footnote">
+          {stats.totalAnswered} questions answered total ({stats.totalCorrect} correct, {stats.totalWrong}{' '}
+          wrong)
+        </p>
+      </div>
+    </div>
+  )
+}

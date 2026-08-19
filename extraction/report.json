@@ -1,0 +1,40 @@
+{
+  "total_pages": 113,
+  "total_questions": 404,
+  "excluded_fragments": [],
+  "questions_with_image": 124,
+  "questions_with_option_images": 5,
+  "flagged_for_review": [
+    {
+      "id": 360,
+      "sourceNumber": "390",
+      "page": 95,
+      "issues": [
+        "multiple_correct_marked"
+      ],
+      "text": "Umuhanda urombereje w’ibice byinshi. Ndashaka kunyura kuri izi kamyo ibyiri  mug"
+    }
+  ],
+  "duplicates": [
+    {
+      "id": 146,
+      "duplicate_of": 9,
+      "sourceNumber": "176"
+    },
+    {
+      "id": 148,
+      "duplicate_of": 12,
+      "sourceNumber": "178"
+    },
+    {
+      "id": 182,
+      "duplicate_of": 181,
+      "sourceNumber": "212"
+    },
+    {
+      "id": 349,
+      "duplicate_of": 335,
+      "sourceNumber": "378"
+    }
+  ]
+}
