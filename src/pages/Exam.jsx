@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import QuestionCard from '../components/QuestionCard.jsx'
 import { buildSession } from '../lib/examEngine'
 import { recordAnswer, recordExamCompletion } from '../lib/history'
+import { getLanguage } from '../lib/language'
 
 const MODE_LABELS = {
   exam: 'Real Exam',
@@ -18,6 +19,7 @@ export default function Exam() {
   // location.key changes on every navigation (even to the same path), so
   // using it here lets "Start Another Exam" force a fresh random session.
   const questions = useMemo(() => buildSession(mode), [mode, location.key])
+  const lang = useMemo(() => getLanguage(), [])
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState(() => Array(questions.length).fill(null))
 
@@ -78,6 +80,7 @@ export default function Exam() {
         selectedIndex={currentAnswer ? currentAnswer.index : null}
         onSelect={handleSelect}
         interactive={true}
+        lang={lang}
       />
 
       {currentAnswer && (

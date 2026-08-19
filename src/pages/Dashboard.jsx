@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { getStatsSummary, getReadiness, PASS_MARK, EXAM_TOTAL } from '../lib/history'
 import { SELECTABLE_QUESTIONS, getAllQuestions } from '../lib/examEngine'
+import { getLanguage, setLanguage } from '../lib/language'
 
 function fmtPct(v) {
   return v == null ? '—' : `${v.toFixed(0)}%`
@@ -19,6 +21,12 @@ export default function Dashboard() {
   const readiness = getReadiness()
   const total = getAllQuestions().length
   const selectable = SELECTABLE_QUESTIONS.length
+  const [lang, setLang] = useState(getLanguage())
+
+  function chooseLanguage(l) {
+    setLanguage(l)
+    setLang(l)
+  }
 
   return (
     <div className="page dashboard">
@@ -27,6 +35,30 @@ export default function Dashboard() {
         {selectable} questions available ({total - selectable} flagged for manual review, excluded from
         auto-selection) &middot; pass mark {PASS_MARK}/{EXAM_TOTAL}
       </p>
+
+      <div className="lang-toggle">
+        <span className="lang-toggle-label">Question language:</span>
+        <button
+          className={`lang-btn ${lang === 'rw' ? 'lang-btn-active' : ''}`}
+          onClick={() => chooseLanguage('rw')}
+        >
+          Kinyarwanda
+        </button>
+        <button
+          className={`lang-btn ${lang === 'en' ? 'lang-btn-active' : ''}`}
+          onClick={() => chooseLanguage('en')}
+        >
+          English
+        </button>
+      </div>
+
+      <div className="law-notice">
+        <strong>Heads up:</strong> Rwanda's road traffic law changed on 10 March 2026 (Law N&deg;
+        014/2026), replacing the 1987 code this question bank is sourced from. Signs, right-of-way and
+        general driving-conduct questions are likely still accurate, but{' '}
+        <strong>numeric limits (speed, weight, distance) may be outdated</strong> — confirm current figures
+        with your driving school before relying on them.
+      </div>
 
       <div className="menu">
         <button className="btn btn-primary" onClick={() => navigate('/exam/exam')}>

@@ -29,6 +29,47 @@ h1 {
   margin-bottom: 28px;
 }
 
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.lang-toggle-label {
+  font-size: 0.82rem;
+  color: #666;
+}
+
+.lang-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #d5d8de;
+  background: white;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-btn-active {
+  background: #2f6fed;
+  border-color: #2f6fed;
+  color: white;
+}
+
+.law-notice {
+  background: #fff8e6;
+  border: 1px solid #e8c766;
+  color: #6b5313;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
 .menu {
   display: flex;
   flex-direction: column;

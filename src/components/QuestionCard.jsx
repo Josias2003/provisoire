@@ -1,3 +1,5 @@
+import { localizeQuestion } from '../lib/language'
+
 /**
  * Renders one question (text and/or image stem, 4 text-and/or-image options).
  *
@@ -8,13 +10,18 @@
  * Using the index keeps React and the click/scoring logic unambiguous while
  * still displaying each option's original printed letter.
  *
+ * `lang` ('rw' | 'en') picks which text to render; images are shared across
+ * both languages. Correctness/images always come from the original question
+ * object - only text is localized.
+ *
  * - Quiz mode (interactive=true): click an option to answer. Once answered
  *   (selectedIndex is set), options lock and correct/incorrect coloring shows.
  * - Review mode (interactive=false): always shows the locked-in coloring for
  *   the given selectedIndex (the user's original answer for that question).
  */
-export default function QuestionCard({ question, selectedIndex, onSelect, interactive }) {
+export default function QuestionCard({ question, selectedIndex, onSelect, interactive, lang = 'rw' }) {
   const answered = selectedIndex != null
+  const localized = localizeQuestion(question, lang)
 
   function optionClass(opt, idx) {
     if (!answered) return 'option'
@@ -26,7 +33,7 @@ export default function QuestionCard({ question, selectedIndex, onSelect, intera
   return (
     <div className="question-card">
       <div className="question-stem">
-        <p className="question-text">{question.text}</p>
+        <p className="question-text">{localized.text}</p>
         {question.image && (
           <img className="question-image" src={question.image} alt="" />
         )}
@@ -49,7 +56,9 @@ export default function QuestionCard({ question, selectedIndex, onSelect, intera
           >
             <span className="option-letter">{opt.letter.toUpperCase()}</span>
             <span className="option-body">
-              {opt.text && <span className="option-text">{opt.text}</span>}
+              {localized.options[idx].text && (
+                <span className="option-text">{localized.options[idx].text}</span>
+              )}
               {opt.image && <img className="option-image" src={opt.image} alt="" />}
             </span>
           </button>

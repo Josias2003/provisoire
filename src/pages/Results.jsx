@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import QuestionCard from '../components/QuestionCard.jsx'
 import Confetti from '../components/Confetti.jsx'
 import { PASS_MARK, EXAM_TOTAL } from '../lib/history'
+import { getLanguage } from '../lib/language'
 
 const MODE_LABELS = {
   exam: 'Real Exam',
@@ -14,6 +15,7 @@ export default function Results() {
   const location = useLocation()
   const navigate = useNavigate()
   const [showReview, setShowReview] = useState(false)
+  const lang = getLanguage()
 
   let payload = location.state
   if (!payload) {
@@ -100,7 +102,7 @@ export default function Results() {
               <div className="review-item-number">
                 Question {i + 1} — {answers[i]?.correct ? 'Correct' : 'Wrong'}
               </div>
-              <QuestionCard question={q} selectedIndex={answers[i]?.index} interactive={false} />
+              <QuestionCard question={q} selectedIndex={answers[i]?.index} interactive={false} lang={lang} />
             </div>
           ))}
         </div>
