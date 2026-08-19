@@ -9,3 +9,5 @@ extraction/contact_sheets/
 extraction/__pycache__/
 
 .DS_Store
+
+.vercel
