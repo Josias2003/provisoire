@@ -4,6 +4,21 @@ import QuestionCard from '../components/QuestionCard.jsx'
 import { buildSession } from '../lib/examEngine'
 import { recordAnswer, recordExamCompletion } from '../lib/history'
 import { getLanguage } from '../lib/language'
+import { getDeviceId } from '../lib/device'
+
+function logExamAnonymously(score, total, mode) {
+  // Best-effort, fire-and-forget: never blocks or breaks the exam UX.
+  try {
+    fetch('/api/log-exam', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ deviceId: getDeviceId(), score, total, mode }),
+      keepalive: true,
+    }).catch(() => {})
+  } catch {
+    // ignore - e.g. fetch unavailable in some embedded webview
+  }
+}
 
 const MODE_LABELS = {
   exam: 'Real Exam',
@@ -57,6 +72,7 @@ export default function Exam() {
     }
     const finalScore = answers.filter((a) => a && a.correct).length
     recordExamCompletion(finalScore, questions.length, mode)
+    logExamAnonymously(finalScore, questions.length, mode)
     const payload = { questions, answers, score: finalScore, total: questions.length, mode }
     sessionStorage.setItem('provisoire_last_result', JSON.stringify(payload))
     navigate('/results', { state: payload })
