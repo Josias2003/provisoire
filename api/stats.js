@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       }
     }
     const d = byDevice[r.deviceId]
-    d.marks.push({ score: r.score, total: r.total, mode: r.mode, ts: r.ts })
+    d.marks.push({ track: r.track || 'provisoire', score: r.score, total: r.total, mode: r.mode, ts: r.ts })
     d.firstSeen = Math.min(d.firstSeen, r.ts)
     d.lastSeen = Math.max(d.lastSeen, r.ts)
     if (!d.country && r.country) d.country = r.country

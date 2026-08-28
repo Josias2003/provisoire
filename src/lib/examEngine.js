@@ -1,20 +1,21 @@
-import questions from '../../data/questions.json'
+import { TRACK_QUESTIONS } from './trackData'
+import { getTrack } from './tracks'
 import { getWrongQuestionIds } from './history'
 
-export const EXAM_LENGTH = 20
-
-// Questions the extractor could not confidently resolve a single correct
-// answer for (see reviewIssues) are excluded from auto-selected pools so
-// the app never quizzes on ambiguous source data - they remain in the data
-// file for transparency, never silently deleted.
-export const SELECTABLE_QUESTIONS = questions.filter((q) => !q.needsReview)
-
-export function getAllQuestions() {
-  return questions
+// Questions the extractor/author could not confidently resolve a single
+// correct answer for (see reviewIssues, Provisoire-only today) are excluded
+// from auto-selected pools so the app never quizzes on ambiguous data - they
+// remain in the data file for transparency, never silently deleted.
+export function getAllQuestions(trackId) {
+  return TRACK_QUESTIONS[trackId] || []
 }
 
-export function getQuestionById(id) {
-  return questions.find((q) => q.id === id)
+export function getSelectableQuestions(trackId) {
+  return getAllQuestions(trackId).filter((q) => !q.needsReview)
+}
+
+export function getQuestionById(trackId, id) {
+  return getAllQuestions(trackId).find((q) => q.id === id)
 }
 
 function shuffle(arr) {
@@ -26,19 +27,22 @@ function shuffle(arr) {
   return a
 }
 
-export function pickRandomQuestions(count = EXAM_LENGTH) {
-  const shuffled = shuffle(SELECTABLE_QUESTIONS)
-  return shuffled.slice(0, Math.min(count, shuffled.length))
-}
-
-export function pickWrongQuestions(count = EXAM_LENGTH) {
-  const wrongIds = new Set(getWrongQuestionIds())
-  const pool = SELECTABLE_QUESTIONS.filter((q) => wrongIds.has(q.id))
+export function pickRandomQuestions(trackId, count) {
+  const pool = getSelectableQuestions(trackId)
   const shuffled = shuffle(pool)
   return shuffled.slice(0, Math.min(count, shuffled.length))
 }
 
-export function buildSession(mode) {
-  if (mode === 'wrong') return pickWrongQuestions(EXAM_LENGTH)
-  return pickRandomQuestions(EXAM_LENGTH)
+export function pickWrongQuestions(trackId, count) {
+  const wrongIds = new Set(getWrongQuestionIds(trackId))
+  const pool = getSelectableQuestions(trackId).filter((q) => wrongIds.has(q.id))
+  const shuffled = shuffle(pool)
+  return shuffled.slice(0, Math.min(count, shuffled.length))
+}
+
+export function buildSession(trackId, mode) {
+  const track = getTrack(trackId)
+  const count = track.examTotal
+  if (mode === 'wrong') return pickWrongQuestions(trackId, count)
+  return pickRandomQuestions(trackId, count)
 }

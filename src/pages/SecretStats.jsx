@@ -80,7 +80,7 @@ export default function SecretStats() {
                     <div key={i} className="option" style={{ cursor: 'default', marginBottom: 8 }}>
                       <span className="option-body">
                         <span className="option-text">
-                          {m.score}/{m.total} ({m.mode}) — {fmtDate(m.ts)}
+                          [{m.track}] {m.score}/{m.total} ({m.mode}) — {fmtDate(m.ts)}
                         </span>
                       </span>
                     </div>

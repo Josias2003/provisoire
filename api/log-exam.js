@@ -20,6 +20,7 @@ export default async function handler(req, res) {
   const score = Number(body.score)
   const total = Number(body.total)
   const mode = typeof body.mode === 'string' ? body.mode.slice(0, 20) : 'unknown'
+  const track = typeof body.track === 'string' ? body.track.slice(0, 40) : 'provisoire'
 
   if (!deviceId || !Number.isFinite(score) || !Number.isFinite(total) || total <= 0) {
     return res.status(400).json({ error: 'invalid payload' })
@@ -27,6 +28,7 @@ export default async function handler(req, res) {
 
   const record = {
     deviceId,
+    track,
     score,
     total,
     mode,

@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
-import { getStatsSummary, getReadiness, getExamDurationMinutes, PASS_MARK, EXAM_TOTAL } from '../lib/history'
-import { SELECTABLE_QUESTIONS, getAllQuestions } from '../lib/examEngine'
+import { getStatsSummary, getReadiness, getExamDurationMinutes } from '../lib/history'
+import { getSelectableQuestions, getAllQuestions } from '../lib/examEngine'
 import { getLanguage, setLanguage } from '../lib/language'
+import { getTrack } from '../lib/tracks'
 
 function fmtPct(v) {
   return v == null ? '—' : `${v.toFixed(0)}%`
@@ -17,12 +18,14 @@ const READINESS_COLOR = {
 
 export default function Dashboard() {
   const navigate = useNavigate()
-  const stats = getStatsSummary()
-  const readiness = getReadiness()
-  const total = getAllQuestions().length
-  const selectable = SELECTABLE_QUESTIONS.length
+  const { trackId } = useParams()
+  const track = getTrack(trackId)
+  const stats = getStatsSummary(trackId)
+  const readiness = getReadiness(trackId)
+  const total = getAllQuestions(trackId).length
+  const selectable = getSelectableQuestions(trackId).length
   const [lang, setLang] = useState(getLanguage())
-  const examMinutes = getExamDurationMinutes()
+  const examMinutes = getExamDurationMinutes(trackId)
 
   function chooseLanguage(l) {
     setLanguage(l)
@@ -31,46 +34,54 @@ export default function Dashboard() {
 
   return (
     <div className="page dashboard">
-      <h1>PROVISOIRE EXAM SIMULATOR</h1>
+      <Link to="/" className="back-link">
+        ← All exams
+      </Link>
+      <h1>{track.name.toUpperCase()}</h1>
       <p className="subtitle">
-        {selectable} questions available ({total - selectable} flagged for manual review, excluded from
-        auto-selection) &middot; pass mark {PASS_MARK}/{EXAM_TOTAL}
+        {selectable} questions available
+        {total - selectable > 0 ? ` (${total - selectable} flagged for manual review, excluded)` : ''} &middot;
+        pass mark {track.passMark}/{track.examTotal}
       </p>
 
-      <div className="lang-toggle">
-        <span className="lang-toggle-label">Question language:</span>
-        <button
-          className={`lang-btn ${lang === 'rw' ? 'lang-btn-active' : ''}`}
-          onClick={() => chooseLanguage('rw')}
-        >
-          Kinyarwanda
-        </button>
-        <button
-          className={`lang-btn ${lang === 'en' ? 'lang-btn-active' : ''}`}
-          onClick={() => chooseLanguage('en')}
-        >
-          English
-        </button>
-      </div>
+      {track.hasLanguages && (
+        <div className="lang-toggle">
+          <span className="lang-toggle-label">Question language:</span>
+          <button
+            className={`lang-btn ${lang === 'rw' ? 'lang-btn-active' : ''}`}
+            onClick={() => chooseLanguage('rw')}
+          >
+            Kinyarwanda
+          </button>
+          <button
+            className={`lang-btn ${lang === 'en' ? 'lang-btn-active' : ''}`}
+            onClick={() => chooseLanguage('en')}
+          >
+            English
+          </button>
+        </div>
+      )}
 
-      <div className="law-notice">
-        <strong>Heads up:</strong> Rwanda's road traffic law changed on 10 March 2026 (Law N&deg;
-        014/2026), replacing the 1987 code this question bank is sourced from. Signs, right-of-way and
-        general driving-conduct questions are likely still accurate, but{' '}
-        <strong>numeric limits (speed, weight, distance) may be outdated</strong> — confirm current figures
-        with your driving school before relying on them.
-      </div>
+      {track.hasLawNotice && (
+        <div className="law-notice">
+          <strong>Heads up:</strong> Rwanda's road traffic law changed on 10 March 2026 (Law N&deg;
+          014/2026), replacing the 1987 code this question bank is sourced from. Signs, right-of-way and
+          general driving-conduct questions are likely still accurate, but{' '}
+          <strong>numeric limits (speed, weight, distance) may be outdated</strong> — confirm current figures
+          with your driving school before relying on them.
+        </div>
+      )}
 
       <div className="menu">
-        <button className="btn btn-primary" onClick={() => navigate('/exam/exam')}>
+        <button className="btn btn-primary" onClick={() => navigate(`/t/${trackId}/exam/exam`)}>
           Start Exam <span className="btn-sub">({examMinutes} min)</span>
         </button>
-        <button className="btn" onClick={() => navigate('/exam/practice')}>
+        <button className="btn" onClick={() => navigate(`/t/${trackId}/exam/practice`)}>
           Practice
         </button>
         <button
           className="btn"
-          onClick={() => navigate('/exam/wrong')}
+          onClick={() => navigate(`/t/${trackId}/exam/wrong`)}
           disabled={stats.totalWrong === 0}
         >
           Wrong Questions
@@ -99,8 +110,11 @@ export default function Dashboard() {
                 </div>
                 <div className="stats-footnote" style={{ margin: 0 }}>
                   Based on your last {readiness.recentCount} exam{readiness.recentCount === 1 ? '' : 's'} —
-                  if you sat the real exam right now, you'd likely score around{' '}
-                  <strong>{readiness.estimatedScoreOn20}/{EXAM_TOTAL}</strong>.
+                  if you sat the exam right now, you'd likely score around{' '}
+                  <strong>
+                    {readiness.estimatedScoreOnTotal}/{track.examTotal}
+                  </strong>
+                  .
                 </div>
               </div>
             </div>

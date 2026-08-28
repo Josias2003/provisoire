@@ -1,9 +1,17 @@
-import questions from '../../data/questions.json'
+import { TRACK_QUESTIONS } from './trackData'
+import { getTrack } from './tracks'
 
-const STORAGE_KEY = 'provisoire_history_v1'
-export const PASS_MARK = 12 // out of 20 - matches the real provisoire exam pass mark
-export const EXAM_TOTAL = 20
-const TOTAL_SELECTABLE_QUESTIONS = questions.filter((q) => !q.needsReview).length
+// Keep the original Provisoire storage key unsuffixed so existing users'
+// history isn't lost by this multi-track upgrade; every other track gets
+// its own namespaced key.
+function storageKey(trackId) {
+  return trackId === 'provisoire' ? 'provisoire_history_v1' : `provisoire_history_v1_${trackId}`
+}
+
+function totalSelectable(trackId) {
+  const qs = TRACK_QUESTIONS[trackId] || []
+  return qs.filter((q) => !q.needsReview).length
+}
 
 function defaultHistory() {
   return {
@@ -13,9 +21,9 @@ function defaultHistory() {
   }
 }
 
-export function loadHistory() {
+export function loadHistory(trackId) {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(storageKey(trackId))
     if (!raw) return defaultHistory()
     const parsed = JSON.parse(raw)
     return { ...defaultHistory(), ...parsed }
@@ -24,41 +32,41 @@ export function loadHistory() {
   }
 }
 
-export function saveHistory(history) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(history))
+export function saveHistory(trackId, history) {
+  localStorage.setItem(storageKey(trackId), JSON.stringify(history))
 }
 
-export function recordAnswer(questionId, isCorrect) {
-  const history = loadHistory()
+export function recordAnswer(trackId, questionId, isCorrect) {
+  const history = loadHistory(trackId)
   const stats = history.questionStats[questionId] || { attempts: 0, correct: 0, wrong: 0, lastResult: null }
   stats.attempts += 1
   if (isCorrect) stats.correct += 1
   else stats.wrong += 1
   stats.lastResult = isCorrect ? 'correct' : 'wrong'
   history.questionStats[questionId] = stats
-  saveHistory(history)
+  saveHistory(trackId, history)
   return history
 }
 
-export function recordExamCompletion(score, total, mode) {
-  const history = loadHistory()
+export function recordExamCompletion(trackId, score, total, mode) {
+  const history = loadHistory(trackId)
   if (mode === 'exam') {
     history.examsCompleted += 1
     history.scores.push({ date: new Date().toISOString(), score, total, mode })
   }
-  saveHistory(history)
+  saveHistory(trackId, history)
   return history
 }
 
-export function getWrongQuestionIds() {
-  const history = loadHistory()
+export function getWrongQuestionIds(trackId) {
+  const history = loadHistory(trackId)
   return Object.entries(history.questionStats)
     .filter(([, s]) => s.lastResult === 'wrong')
     .map(([id]) => Number(id))
 }
 
-export function getStatsSummary() {
-  const history = loadHistory()
+export function getStatsSummary(trackId) {
+  const history = loadHistory(trackId)
   const examScores = history.scores.filter((s) => s.mode === 'exam')
   const best = examScores.length ? Math.max(...examScores.map((s) => (s.score / s.total) * 100)) : null
   const avg = examScores.length
@@ -83,30 +91,32 @@ export function getStatsSummary() {
 }
 
 /**
- * Readiness score (0-100), built from three things that actually predict
- * exam-day performance, each expressed as a plain percentage so the math is
- * inspectable rather than a black box:
+ * Readiness score (0-100) for a given track, built from three things that
+ * actually predict exam-day performance, each expressed as a plain
+ * percentage so the math is inspectable rather than a black box:
  *
- *   recentAvgPct   - average % across your last 5 "Start Exam" runs
- *                    (the closest simulation of the real thing)
- *   passRatePct    - % of those last 5 exams that hit the 12/20 pass mark
- *   coveragePct    - % of the whole question bank you've seen at least once
- *                    (across any mode) - a low score here means there are
- *                    whole topics you haven't been tested on yet
+ *   recentAvgPct   - average % across your last 5 "Start Exam" runs on this
+ *                    track (the closest simulation of the real thing)
+ *   passRatePct    - % of those last 5 exams that hit this track's pass mark
+ *   coveragePct    - % of this track's whole question bank you've seen at
+ *                    least once (across any mode) - a low score here means
+ *                    there are whole topics you haven't been tested on yet
  *
  * readiness = 0.5 * recentAvgPct + 0.3 * passRatePct + 0.2 * coveragePct
  *
  * Weighted toward recent real-exam accuracy (the strongest signal), with
  * pass consistency and breadth of coverage as supporting signals.
  */
-export function getReadiness() {
-  const history = loadHistory()
+export function getReadiness(trackId) {
+  const history = loadHistory(trackId)
+  const track = getTrack(trackId)
   const examScores = history.scores.filter((s) => s.mode === 'exam')
   const recent = examScores.slice(-5)
 
+  const totalSelectableQuestions = totalSelectable(trackId)
   const attemptedCount = Object.keys(history.questionStats).length
-  const coveragePct = TOTAL_SELECTABLE_QUESTIONS > 0
-    ? Math.min(100, (attemptedCount / TOTAL_SELECTABLE_QUESTIONS) * 100)
+  const coveragePct = totalSelectableQuestions > 0
+    ? Math.min(100, (attemptedCount / totalSelectableQuestions) * 100)
     : 0
 
   if (recent.length === 0) {
@@ -118,12 +128,12 @@ export function getReadiness() {
       passRatePct: null,
       coveragePct,
       recentCount: 0,
-      estimatedScoreOn20: null,
+      estimatedScoreOnTotal: null,
     }
   }
 
   const recentAvgPct = recent.reduce((sum, s) => sum + (s.score / s.total) * 100, 0) / recent.length
-  const passCount = recent.filter((s) => s.score >= PASS_MARK).length
+  const passCount = recent.filter((s) => s.score >= track.passMark).length
   const passRatePct = (passCount / recent.length) * 100
 
   const readinessScore = Math.round(0.5 * recentAvgPct + 0.3 * passRatePct + 0.2 * coveragePct)
@@ -140,7 +150,7 @@ export function getReadiness() {
     passRatePct,
     coveragePct,
     recentCount: recent.length,
-    estimatedScoreOn20: Math.round((recentAvgPct / 100) * EXAM_TOTAL),
+    estimatedScoreOnTotal: Math.round((recentAvgPct / 100) * track.examTotal),
   }
 }
 
@@ -148,23 +158,23 @@ const MAX_EXAM_MINUTES = 25 // least-ready / no data yet
 const MIN_EXAM_MINUTES = 15 // most-ready
 
 /**
- * Time limit for a "Start Exam" run, scaled to how ready you are: 25
- * minutes at readiness 0 (or before any exam has been taken - err generous
- * until we know your level), down to 15 minutes at readiness 100, linearly
- * in between. More time when you need it, less when you don't.
+ * Time limit for a "Start Exam" run on this track, scaled to how ready you
+ * are: 25 minutes at readiness 0 (or before any exam has been taken - err
+ * generous until we know your level), down to 15 minutes at readiness 100,
+ * linearly in between. More time when you need it, less when you don't.
  */
-export function getExamDurationMinutes() {
-  const readiness = getReadiness()
+export function getExamDurationMinutes(trackId) {
+  const readiness = getReadiness(trackId)
   const score = readiness.hasData ? readiness.readinessScore : 0
   const minutes = MAX_EXAM_MINUTES - (score / 100) * (MAX_EXAM_MINUTES - MIN_EXAM_MINUTES)
   return Math.round(minutes)
 }
 
-export function getQuestionStat(questionId) {
-  const history = loadHistory()
+export function getQuestionStat(trackId, questionId) {
+  const history = loadHistory(trackId)
   return history.questionStats[questionId] || { attempts: 0, correct: 0, wrong: 0, lastResult: null }
 }
 
-export function clearHistory() {
-  localStorage.removeItem(STORAGE_KEY)
+export function clearHistory(trackId) {
+  localStorage.removeItem(storageKey(trackId))
 }

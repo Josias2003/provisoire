@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import QuestionCard from '../components/QuestionCard.jsx'
 import Confetti from '../components/Confetti.jsx'
-import { PASS_MARK, EXAM_TOTAL } from '../lib/history'
 import { getLanguage } from '../lib/language'
+import { getTrack } from '../lib/tracks'
 
 const MODE_LABELS = {
   exam: 'Real Exam',
@@ -14,8 +14,10 @@ const MODE_LABELS = {
 export default function Results() {
   const location = useLocation()
   const navigate = useNavigate()
+  const { trackId } = useParams()
+  const track = getTrack(trackId)
   const [showReview, setShowReview] = useState(false)
-  const lang = getLanguage()
+  const lang = track.hasLanguages ? getLanguage() : 'rw'
 
   let payload = location.state
   if (!payload) {
@@ -27,7 +29,7 @@ export default function Results() {
     return (
       <div className="page">
         <p>No recent exam result found.</p>
-        <button className="btn" onClick={() => navigate('/')}>
+        <button className="btn" onClick={() => navigate(`/t/${trackId}`)}>
           Back to dashboard
         </button>
       </div>
@@ -38,7 +40,7 @@ export default function Results() {
   const wrong = total - score
   const pct = Math.round((score / total) * 100)
   // scale the pass mark for shorter sessions (e.g. a wrong-questions set with < 20 questions)
-  const passThreshold = Math.round(PASS_MARK * (total / EXAM_TOTAL))
+  const passThreshold = Math.round(track.passMark * (total / track.examTotal))
   const passed = score >= passThreshold
 
   return (
@@ -48,7 +50,9 @@ export default function Results() {
       <div className="score-hero">
         {score} / {total}
       </div>
-      <p className="mode-tag">{MODE_LABELS[mode] || mode}</p>
+      <p className="mode-tag">
+        {track.name} · {MODE_LABELS[mode] || mode}
+      </p>
 
       <div className={`pass-banner ${passed ? 'pass' : 'fail'}`}>
         {passed ? (
@@ -84,14 +88,17 @@ export default function Results() {
         <button className="btn" onClick={() => setShowReview((v) => !v)}>
           {showReview ? 'Hide Review' : 'Review Answers'}
         </button>
-        <button className="btn btn-primary" onClick={() => navigate(`/exam/${mode}`)}>
+        <button className="btn btn-primary" onClick={() => navigate(`/t/${trackId}/exam/${mode}`)}>
           Start Another Exam
         </button>
-        <button className="btn" onClick={() => navigate('/exam/wrong')}>
+        <button className="btn" onClick={() => navigate(`/t/${trackId}/exam/wrong`)}>
           Practice Wrong Questions
         </button>
-        <button className="btn btn-ghost" onClick={() => navigate('/')}>
+        <button className="btn btn-ghost" onClick={() => navigate(`/t/${trackId}`)}>
           Dashboard
+        </button>
+        <button className="btn btn-ghost" onClick={() => navigate('/')}>
+          All exams
         </button>
       </div>
 
