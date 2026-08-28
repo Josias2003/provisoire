@@ -62,6 +62,28 @@ export default function Dashboard() {
         </div>
       )}
 
+      {track.references && (
+        <div className="law-notice" style={{ background: '#eef4ff', borderColor: '#b8cef7', color: '#1a3a6b' }}>
+          <strong>What this content is:</strong> original practice questions written from general,
+          well-established domain knowledge — not sourced from any vendor's copyrighted exam content, and not
+          affiliated with or endorsed by CompTIA or any certifying body. The style name (e.g. "Network+ style")
+          only describes the topic area. Verify anything here against the primary sources below, and treat
+          official vendor study material as the authority for the real exam.
+          <div style={{ marginTop: 8 }}>
+            <strong>Sources:</strong>
+            <ul style={{ margin: '4px 0 0', paddingLeft: 18 }}>
+              {track.references.map((r) => (
+                <li key={r.url}>
+                  <a href={r.url} target="_blank" rel="noopener noreferrer">
+                    {r.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
       {track.hasLawNotice && (
         <div className="law-notice">
           <strong>Heads up:</strong> Rwanda's road traffic law changed on 10 March 2026 (Law N&deg;

@@ -138,6 +138,11 @@ h1 {
   margin-bottom: 22px;
 }
 
+.law-notice a {
+  color: #2f6fed;
+  font-weight: 600;
+}
+
 .menu {
   display: flex;
   flex-direction: column;

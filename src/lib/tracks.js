@@ -20,6 +20,12 @@ export const TRACKS = [
     hasLanguages: false,
     hasImages: false,
     hasLawNotice: false,
+    references: [
+      { label: 'IANA Service Name and Transport Protocol Port Number Registry', url: 'https://www.iana.org/assignments/service-names-port-numbers' },
+      { label: 'RFC 1918 - Address Allocation for Private Internets', url: 'https://www.rfc-editor.org/rfc/rfc1918' },
+      { label: 'RFC 2131 - Dynamic Host Configuration Protocol (DHCP)', url: 'https://www.rfc-editor.org/rfc/rfc2131' },
+      { label: 'CompTIA Network+ (N10-009) official exam objectives', url: 'https://www.comptia.org/certifications/network' },
+    ],
   },
   {
     id: 'it-cybersecurity',
@@ -31,6 +37,12 @@ export const TRACKS = [
     hasLanguages: false,
     hasImages: false,
     hasLawNotice: false,
+    references: [
+      { label: 'OWASP Top 10', url: 'https://owasp.org/Top10/' },
+      { label: 'NIST Cybersecurity Framework', url: 'https://www.nist.gov/cyberframework' },
+      { label: 'NIST Glossary (CIA triad, threat/vulnerability/exploit definitions)', url: 'https://csrc.nist.gov/glossary' },
+      { label: 'CompTIA Security+ (SY0-701) official exam objectives', url: 'https://www.comptia.org/certifications/security' },
+    ],
   },
   {
     id: 'it-helpdesk',
@@ -42,6 +54,11 @@ export const TRACKS = [
     hasLanguages: false,
     hasImages: false,
     hasLawNotice: false,
+    references: [
+      { label: 'CompTIA A+ (220-1101/1102) official exam objectives', url: 'https://www.comptia.org/certifications/a' },
+      { label: 'Microsoft Learn - Windows client documentation', url: 'https://learn.microsoft.com/windows/' },
+      { label: 'IANA Service Name and Transport Protocol Port Number Registry', url: 'https://www.iana.org/assignments/service-names-port-numbers' },
+    ],
   },
   {
     id: 'it-software',
@@ -53,6 +70,11 @@ export const TRACKS = [
     hasLanguages: false,
     hasImages: false,
     hasLawNotice: false,
+    references: [
+      { label: 'MDN Web Docs (HTML, CSS, JavaScript, HTTP)', url: 'https://developer.mozilla.org/' },
+      { label: 'Git official documentation', url: 'https://git-scm.com/doc' },
+      { label: 'Scrum Guide (scrum.org)', url: 'https://scrumguides.org/' },
+    ],
   },
 ]
 
