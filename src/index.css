@@ -102,6 +102,12 @@ h1 {
   cursor: not-allowed;
 }
 
+.btn-sub {
+  font-weight: 500;
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
 .btn-primary {
   background: #2f6fed;
   border-color: #2f6fed;
@@ -235,6 +241,33 @@ h1 {
 .exam-header h2 {
   font-size: 1.1rem;
   margin: 0;
+}
+
+.exam-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer-badge {
+  background: #eef0f3;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-badge-warning {
+  background: #fdeceb;
+  color: #a52e2e;
+  animation: timer-pulse 1s infinite;
+}
+
+@keyframes timer-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 .score-badge {

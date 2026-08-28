@@ -11,3 +11,10 @@ extraction/__pycache__/
 .DS_Store
 
 .vercel
+.env*
+
+# agent-tooling reference docs auto-installed by `vercel integration add`
+# (Upstash skill docs for coding assistants) - not part of the app itself
+.agents/
+.claude/
+skills-lock.json

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { getStatsSummary, getReadiness, PASS_MARK, EXAM_TOTAL } from '../lib/history'
+import { getStatsSummary, getReadiness, getExamDurationMinutes, PASS_MARK, EXAM_TOTAL } from '../lib/history'
 import { SELECTABLE_QUESTIONS, getAllQuestions } from '../lib/examEngine'
 import { getLanguage, setLanguage } from '../lib/language'
 
@@ -22,6 +22,7 @@ export default function Dashboard() {
   const total = getAllQuestions().length
   const selectable = SELECTABLE_QUESTIONS.length
   const [lang, setLang] = useState(getLanguage())
+  const examMinutes = getExamDurationMinutes()
 
   function chooseLanguage(l) {
     setLanguage(l)
@@ -62,7 +63,7 @@ export default function Dashboard() {
 
       <div className="menu">
         <button className="btn btn-primary" onClick={() => navigate('/exam/exam')}>
-          Start Exam
+          Start Exam <span className="btn-sub">({examMinutes} min)</span>
         </button>
         <button className="btn" onClick={() => navigate('/exam/practice')}>
           Practice
@@ -75,6 +76,9 @@ export default function Dashboard() {
           Wrong Questions
         </button>
       </div>
+      <p className="stats-footnote" style={{ marginTop: -10, marginBottom: 20 }}>
+        Time limit scales with your readiness: 25 min least-ready → 15 min most-ready.
+      </p>
 
       <div className="readiness-panel" style={{ borderColor: READINESS_COLOR[readiness.label] }}>
         <h2>Exam Readiness</h2>

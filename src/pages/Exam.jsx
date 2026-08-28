@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import QuestionCard from '../components/QuestionCard.jsx'
 import { buildSession } from '../lib/examEngine'
-import { recordAnswer, recordExamCompletion } from '../lib/history'
+import { recordAnswer, recordExamCompletion, getExamDurationMinutes } from '../lib/history'
 import { getLanguage } from '../lib/language'
 import { getDeviceId } from '../lib/device'
 
@@ -26,17 +26,60 @@ const MODE_LABELS = {
   wrong: 'Wrong Questions',
 }
 
+// Only "Start Exam" simulates real timed conditions. Practice and Wrong
+// Questions stay untimed since their point is relaxed, thorough review.
+const TIMED_MODES = new Set(['exam'])
+
+function fmtClock(totalSeconds) {
+  const m = Math.floor(totalSeconds / 60)
+  const s = totalSeconds % 60
+  return `${m}:${String(s).padStart(2, '0')}`
+}
+
 export default function Exam() {
   const { mode } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
 
   // location.key changes on every navigation (even to the same path), so
-  // using it here lets "Start Another Exam" force a fresh random session.
+  // using it here lets "Start Another Exam" force a fresh random session
+  // (and recompute the time limit from your latest readiness score).
   const questions = useMemo(() => buildSession(mode), [mode, location.key])
   const lang = useMemo(() => getLanguage(), [])
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState(() => Array(questions.length).fill(null))
+
+  const isTimed = TIMED_MODES.has(mode)
+  const durationMinutes = useMemo(() => (isTimed ? getExamDurationMinutes() : null), [isTimed, location.key])
+  const [secondsLeft, setSecondsLeft] = useState(() => (isTimed ? durationMinutes * 60 : null))
+  const finishedRef = useRef(false)
+
+  function finishExam(finalAnswers) {
+    if (finishedRef.current) return
+    finishedRef.current = true
+    const finalScore = finalAnswers.filter((a) => a && a.correct).length
+    recordExamCompletion(finalScore, questions.length, mode)
+    logExamAnonymously(finalScore, questions.length, mode)
+    const payload = { questions, answers: finalAnswers, score: finalScore, total: questions.length, mode }
+    sessionStorage.setItem('provisoire_last_result', JSON.stringify(payload))
+    navigate('/results', { state: payload })
+  }
+
+  useEffect(() => {
+    if (!isTimed || questions.length === 0) return
+    const interval = setInterval(() => {
+      setSecondsLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval)
+          finishExam(answers)
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+    return () => clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTimed, questions.length, answers])
 
   if (questions.length === 0) {
     return (
@@ -70,12 +113,7 @@ export default function Exam() {
       setIndex(index + 1)
       return
     }
-    const finalScore = answers.filter((a) => a && a.correct).length
-    recordExamCompletion(finalScore, questions.length, mode)
-    logExamAnonymously(finalScore, questions.length, mode)
-    const payload = { questions, answers, score: finalScore, total: questions.length, mode }
-    sessionStorage.setItem('provisoire_last_result', JSON.stringify(payload))
-    navigate('/results', { state: payload })
+    finishExam(answers)
   }
 
   const isLast = index + 1 === questions.length
@@ -86,8 +124,15 @@ export default function Exam() {
         <h2>
           Question {index + 1} / {questions.length}
         </h2>
-        <div className="score-badge">
-          Score: {score} / {answeredCount}
+        <div className="exam-header-right">
+          {isTimed && (
+            <div className={`timer-badge ${secondsLeft <= 60 ? 'timer-badge-warning' : ''}`}>
+              {fmtClock(secondsLeft)}
+            </div>
+          )}
+          <div className="score-badge">
+            Score: {score} / {answeredCount}
+          </div>
         </div>
       </div>
 

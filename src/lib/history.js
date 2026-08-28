@@ -144,6 +144,22 @@ export function getReadiness() {
   }
 }
 
+const MAX_EXAM_MINUTES = 25 // least-ready / no data yet
+const MIN_EXAM_MINUTES = 15 // most-ready
+
+/**
+ * Time limit for a "Start Exam" run, scaled to how ready you are: 25
+ * minutes at readiness 0 (or before any exam has been taken - err generous
+ * until we know your level), down to 15 minutes at readiness 100, linearly
+ * in between. More time when you need it, less when you don't.
+ */
+export function getExamDurationMinutes() {
+  const readiness = getReadiness()
+  const score = readiness.hasData ? readiness.readinessScore : 0
+  const minutes = MAX_EXAM_MINUTES - (score / 100) * (MAX_EXAM_MINUTES - MIN_EXAM_MINUTES)
+  return Math.round(minutes)
+}
+
 export function getQuestionStat(questionId) {
   const history = loadHistory()
   return history.questionStats[questionId] || { attempts: 0, correct: 0, wrong: 0, lastResult: null }
