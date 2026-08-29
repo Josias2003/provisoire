@@ -1,4 +1,5 @@
 import { localizeQuestion } from '../lib/language'
+import { renderRichText } from '../lib/richText'
 
 /**
  * Renders one question (text and/or image stem, 4 text-and/or-image options).
@@ -33,7 +34,7 @@ export default function QuestionCard({ question, selectedIndex, onSelect, intera
   return (
     <div className="question-card">
       <div className="question-stem">
-        <p className="question-text">{localized.text}</p>
+        <p className="question-text">{renderRichText(localized.text)}</p>
         {question.image && (
           <img className="question-image" src={question.image} alt="" />
         )}
@@ -57,7 +58,7 @@ export default function QuestionCard({ question, selectedIndex, onSelect, intera
             <span className="option-letter">{opt.letter.toUpperCase()}</span>
             <span className="option-body">
               {localized.options[idx].text && (
-                <span className="option-text">{localized.options[idx].text}</span>
+                <span className="option-text">{renderRichText(localized.options[idx].text)}</span>
               )}
               {opt.image && <img className="option-image" src={opt.image} alt="" />}
             </span>

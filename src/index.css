@@ -366,6 +366,37 @@ h1 {
   white-space: pre-wrap;
 }
 
+.code-inline {
+  background: #eef0f3;
+  border: 1px solid #dee1e6;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.92em;
+  color: #1a3a6b;
+  white-space: pre-wrap;
+}
+
+.code-block {
+  background: #1e2229;
+  color: #e4e8f1;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 8px 0;
+  overflow-x: auto;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.code-block code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  white-space: pre;
+}
+
+.option-text .code-inline {
+  font-size: 0.9em;
+}
+
 .question-image {
   max-width: 100%;
   border-radius: 8px;
