@@ -25,6 +25,7 @@ export default function Dashboard() {
   const total = getAllQuestions(trackId).length
   const selectable = getSelectableQuestions(trackId).length
   const [lang, setLang] = useState(getLanguage())
+  const isTimed = track.hasTimer !== false
   const examMinutes = getExamDurationMinutes(trackId)
 
   function chooseLanguage(l) {
@@ -96,7 +97,7 @@ export default function Dashboard() {
 
       <div className="menu">
         <button className="btn btn-primary" onClick={() => navigate(`/t/${trackId}/exam/exam`)}>
-          Start Exam <span className="btn-sub">({examMinutes} min)</span>
+          Start Exam{isTimed && <span className="btn-sub"> ({examMinutes} min)</span>}
         </button>
         <button className="btn" onClick={() => navigate(`/t/${trackId}/exam/practice`)}>
           Practice
@@ -109,9 +110,11 @@ export default function Dashboard() {
           Wrong Questions
         </button>
       </div>
-      <p className="stats-footnote" style={{ marginTop: -10, marginBottom: 20 }}>
-        Time limit scales with your readiness: 25 min least-ready → 15 min most-ready.
-      </p>
+      {isTimed && (
+        <p className="stats-footnote" style={{ marginTop: -10, marginBottom: 20 }}>
+          Time limit scales with your readiness: 25 min least-ready → 15 min most-ready.
+        </p>
+      )}
 
       <div className="readiness-panel" style={{ borderColor: READINESS_COLOR[readiness.label] }}>
         <h2>Exam Readiness</h2>

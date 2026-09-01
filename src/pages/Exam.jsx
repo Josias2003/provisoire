@@ -51,7 +51,7 @@ export default function Exam() {
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState(() => Array(questions.length).fill(null))
 
-  const isTimed = TIMED_MODES.has(mode)
+  const isTimed = TIMED_MODES.has(mode) && track.hasTimer !== false
   const durationMinutes = useMemo(
     () => (isTimed ? getExamDurationMinutes(trackId) : null),
     [isTimed, trackId, location.key],

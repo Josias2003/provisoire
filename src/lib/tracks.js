@@ -9,6 +9,7 @@ export const TRACKS = [
     hasLanguages: true,
     hasImages: true,
     hasLawNotice: true,
+    hasTimer: false,
   },
   {
     id: 'it-networking',
