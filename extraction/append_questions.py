@@ -40,7 +40,10 @@ def append_questions(filename: str, questions: list):
             {"letter": LETTERS[i], "text": opts[i].strip(), "correct": i == correct}
             for i in range(4)
         ]
-        new_objs.append({"id": next_id, "text": text, "options": options})
+        obj = {"id": next_id, "text": text, "options": options}
+        if q.get("image"):
+            obj["image"] = q["image"]
+        new_objs.append(obj)
         next_id += 1
 
     combined = existing + new_objs

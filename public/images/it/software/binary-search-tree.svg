@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="320" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Binary Search Tree</text>
+
+  <!-- edges -->
+  <g stroke="#9aa3b2" stroke-width="2.5">
+    <line x1="300" y1="65" x2="180" y2="140"/>
+    <line x1="300" y1="65" x2="420" y2="140"/>
+    <line x1="180" y1="140" x2="110" y2="215"/>
+    <line x1="180" y1="140" x2="250" y2="215"/>
+    <line x1="420" y1="140" x2="360" y2="215"/>
+    <line x1="420" y1="140" x2="490" y2="215"/>
+  </g>
+
+  <!-- nodes -->
+  <g>
+    <circle cx="300" cy="55" r="26" fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+    <text x="300" y="61" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">50</text>
+
+    <circle cx="180" cy="140" r="26" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+    <text x="180" y="146" text-anchor="middle" font-size="14" fill="#1a1d23">30</text>
+
+    <circle cx="420" cy="140" r="26" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+    <text x="420" y="146" text-anchor="middle" font-size="14" fill="#1a1d23">70</text>
+
+    <circle cx="110" cy="215" r="26" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+    <text x="110" y="221" text-anchor="middle" font-size="14" fill="#1a1d23">20</text>
+
+    <circle cx="250" cy="215" r="26" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+    <text x="250" y="221" text-anchor="middle" font-size="14" fill="#1a1d23">40</text>
+
+    <circle cx="360" cy="215" r="26" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+    <text x="360" y="221" text-anchor="middle" font-size="14" fill="#1a1d23">60</text>
+
+    <circle cx="490" cy="215" r="26" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+    <text x="490" y="221" text-anchor="middle" font-size="14" fill="#1a1d23">80</text>
+  </g>
+
+  <text x="300" y="290" text-anchor="middle" font-size="13" fill="#666">Root = 50 (highlighted)</text>
+</svg>

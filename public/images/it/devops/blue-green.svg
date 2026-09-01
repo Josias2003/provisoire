@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="260" fill="#ffffff"/>
+  <text x="300" y="24" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Blue-Green Deployment</text>
+
+  <rect x="240" y="45" width="120" height="45" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="300" y="72" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1d23">Router</text>
+
+  <rect x="80" y="150" width="180" height="70" rx="8" fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+  <text x="170" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Blue (v1)</text>
+  <text x="170" y="200" text-anchor="middle" font-size="12" fill="#e8eefd">receiving live traffic</text>
+
+  <rect x="340" y="150" width="180" height="70" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="430" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1d23">Green (v2)</text>
+  <text x="430" y="200" text-anchor="middle" font-size="12" fill="#666">staged, idle</text>
+
+  <line x1="270" y1="90" x2="180" y2="148" stroke="#2f6fed" stroke-width="3" marker-end="url(#a12)"/>
+  <line x1="330" y1="90" x2="420" y2="148" stroke="#c7cbd3" stroke-width="2.5" stroke-dasharray="5 4"/>
+
+  <defs>
+    <marker id="a12" markerWidth="10" markerHeight="10" refX="4" refY="5" orient="auto">
+      <path d="M0,0 L8,5 L0,10 z" fill="#2f6fed"/>
+    </marker>
+  </defs>
+
+  <text x="300" y="245" text-anchor="middle" font-size="13" fill="#666">Which environment is currently receiving live production traffic?</text>
+</svg>

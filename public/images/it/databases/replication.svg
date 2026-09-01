@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="260" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Database Replication</text>
+
+  <rect x="70" y="80" width="160" height="60" rx="8" fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+  <text x="150" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Primary DB</text>
+
+  <rect x="370" y="80" width="160" height="60" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="450" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1d23">Replica DB</text>
+
+  <line x1="230" y1="100" x2="368" y2="100" stroke="#9aa3b2" stroke-width="2.5" marker-end="url(#a9)"/>
+  <text x="300" y="90" text-anchor="middle" font-size="12" fill="#666">replicates changes</text>
+
+  <line x1="150" y1="80" x2="150" y2="40" stroke="#2f6fed" stroke-width="2.5" marker-end="url(#a9)"/>
+  <text x="150" y="30" text-anchor="middle" font-size="12" fill="#2f6fed">app writes</text>
+
+  <line x1="450" y1="40" x2="450" y2="78" stroke="#2f6fed" stroke-width="2.5" marker-end="url(#a9)"/>
+  <text x="450" y="30" text-anchor="middle" font-size="12" fill="#2f6fed">app reads</text>
+
+  <defs>
+    <marker id="a9" markerWidth="10" markerHeight="10" refX="4" refY="5" orient="auto">
+      <path d="M0,0 L8,5 L0,10 z" fill="#9aa3b2"/>
+    </marker>
+  </defs>
+
+  <text x="300" y="220" text-anchor="middle" font-size="13" fill="#666">Which instance should typically handle write operations?</text>
+</svg>

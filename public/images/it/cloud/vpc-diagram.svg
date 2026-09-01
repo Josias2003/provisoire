@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="380" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Virtual Private Cloud (10.0.0.0/16)</text>
+
+  <rect x="40" y="45" width="520" height="310" rx="10" fill="#f7f8fa" stroke="#d5d8de" stroke-width="2"/>
+
+  <!-- public subnet -->
+  <rect x="70" y="75" width="220" height="120" rx="8" fill="#dbe6fc" stroke="#2f6fed" stroke-width="2"/>
+  <text x="180" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#1a3a6b">Public Subnet</text>
+  <rect x="100" y="120" width="160" height="45" rx="6" fill="#eef0f3" stroke="#d5d8de"/>
+  <text x="180" y="147" text-anchor="middle" font-size="12" fill="#1a1d23">Web server instance</text>
+
+  <!-- private subnet -->
+  <rect x="70" y="220" width="220" height="120" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="180" y="245" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1d23">Private Subnet</text>
+  <rect x="100" y="265" width="160" height="45" rx="6" fill="#ffffff" stroke="#d5d8de"/>
+  <text x="180" y="292" text-anchor="middle" font-size="12" fill="#1a1d23">Database instance</text>
+
+  <!-- IGW -->
+  <rect x="370" y="75" width="150" height="50" rx="8" fill="#2f6fed" stroke="#255bc4"/>
+  <text x="445" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Internet Gateway</text>
+
+  <!-- NAT -->
+  <rect x="370" y="240" width="150" height="50" rx="8" fill="#a9c6f9" stroke="#2f6fed"/>
+  <text x="445" y="270" text-anchor="middle" font-size="13" font-weight="700" fill="#1a3a6b">NAT Gateway</text>
+
+  <!-- connections -->
+  <line x1="290" y1="130" x2="368" y2="100" stroke="#9aa3b2" stroke-width="2.5"/>
+  <line x1="290" y1="280" x2="368" y2="265" stroke="#9aa3b2" stroke-width="2.5"/>
+  <line x1="445" y1="240" x2="445" y2="127" stroke="#9aa3b2" stroke-width="2.5" stroke-dasharray="5 4"/>
+
+  <text x="300" y="365" text-anchor="middle" font-size="13" fill="#666">Which gateway lets the private subnet reach the internet outbound-only?</text>
+</svg>

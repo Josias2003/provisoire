@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="220" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Entity-Relationship Diagram</text>
+
+  <rect x="60" y="80" width="160" height="60" rx="8" fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+  <text x="140" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Customer</text>
+
+  <rect x="390" y="80" width="160" height="60" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="470" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1d23">Order</text>
+
+  <line x1="220" y1="110" x2="388" y2="110" stroke="#1a1d23" stroke-width="2.5"/>
+  <text x="245" y="102" font-size="16" font-weight="700" fill="#1a1d23">1</text>
+  <!-- crow's foot for "many" -->
+  <path d="M388,100 L388,120 M388,110 L370,100 M388,110 L370,120" stroke="#1a1d23" stroke-width="2.5" fill="none"/>
+  <text x="345" y="102" font-size="16" font-weight="700" fill="#1a1d23">N</text>
+
+  <text x="300" y="190" text-anchor="middle" font-size="13" fill="#666">One Customer can place many Orders</text>
+</svg>

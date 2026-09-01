@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="340" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Active Directory Hierarchy</text>
+
+  <rect x="40" y="45" width="520" height="270" rx="10" fill="#f7f8fa" stroke="#d5d8de" stroke-width="2"/>
+  <text x="70" y="70" font-size="13" font-weight="700" fill="#1a1d23">Forest: corp.example</text>
+
+  <rect x="70" y="85" width="460" height="210" rx="8" fill="#dbe6fc" stroke="#2f6fed" stroke-width="2"/>
+  <text x="100" y="110" font-size="13" font-weight="700" fill="#1a3a6b">Domain: corp.example.com</text>
+
+  <rect x="100" y="130" width="180" height="140" rx="8" fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+  <text x="190" y="155" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">OU: IT</text>
+  <rect x="120" y="170" width="140" height="30" rx="5" fill="#ffffff"/>
+  <text x="190" y="190" text-anchor="middle" font-size="11" fill="#1a1d23">User: jsmith</text>
+  <rect x="120" y="210" width="140" height="30" rx="5" fill="#ffffff"/>
+  <text x="190" y="230" text-anchor="middle" font-size="11" fill="#1a1d23">Computer: PC-01</text>
+
+  <rect x="320" y="130" width="180" height="140" rx="8" fill="#a9c6f9" stroke="#2f6fed" stroke-width="2"/>
+  <text x="410" y="155" text-anchor="middle" font-size="13" font-weight="700" fill="#1a3a6b">OU: Sales</text>
+  <rect x="340" y="170" width="140" height="30" rx="5" fill="#ffffff"/>
+  <text x="410" y="190" text-anchor="middle" font-size="11" fill="#1a1d23">User: mwilson</text>
+
+  <text x="300" y="330" text-anchor="middle" font-size="13" fill="#666">Which container directly holds the 'IT' OU?</text>
+</svg>

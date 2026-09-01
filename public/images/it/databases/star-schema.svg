@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="400" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Data Warehouse Schema</text>
+
+  <!-- center fact table -->
+  <rect x="235" y="170" width="130" height="60" rx="8" fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+  <text x="300" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Fact_Sales</text>
+
+  <!-- 4 dimension tables around -->
+  <rect x="235" y="60" width="130" height="55" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="300" y="92" text-anchor="middle" font-size="12.5" fill="#1a1d23">Dim_Date</text>
+
+  <rect x="60" y="170" width="130" height="55" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="125" y="202" text-anchor="middle" font-size="12.5" fill="#1a1d23">Dim_Customer</text>
+
+  <rect x="410" y="170" width="130" height="55" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="475" y="202" text-anchor="middle" font-size="12.5" fill="#1a1d23">Dim_Product</text>
+
+  <rect x="235" y="285" width="130" height="55" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="300" y="317" text-anchor="middle" font-size="12.5" fill="#1a1d23">Dim_Store</text>
+
+  <g stroke="#9aa3b2" stroke-width="2">
+    <line x1="300" y1="170" x2="300" y2="115"/>
+    <line x1="235" y1="200" x2="190" y2="200"/>
+    <line x1="365" y1="200" x2="410" y2="200"/>
+    <line x1="300" y1="230" x2="300" y2="285"/>
+  </g>
+
+  <text x="300" y="370" text-anchor="middle" font-size="13" fill="#666">What is this design pattern called?</text>
+</svg>

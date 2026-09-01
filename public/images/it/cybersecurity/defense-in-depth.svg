@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="420" fill="#ffffff"/>
+  <text x="300" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Layered Security Controls</text>
+
+  <circle cx="300" cy="230" r="175" fill="#dbe6fc" stroke="#2f6fed" stroke-width="2"/>
+  <circle cx="300" cy="230" r="135" fill="#c2d6fb" stroke="#2f6fed" stroke-width="2"/>
+  <circle cx="300" cy="230" r="95"  fill="#a9c6f9" stroke="#2f6fed" stroke-width="2"/>
+  <circle cx="300" cy="230" r="55"  fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+
+  <text x="300" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="#1a3a6b">Layer 1 (outermost)</text>
+  <text x="300" y="130" text-anchor="middle" font-size="13" font-weight="600" fill="#1a3a6b">Layer 2</text>
+  <text x="300" y="170" text-anchor="middle" font-size="13" font-weight="600" fill="#1a3a6b">Layer 3</text>
+  <text x="300" y="235" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Data</text>
+
+  <text x="300" y="395" text-anchor="middle" font-size="13" fill="#666">Outer layers = Firewall/Perimeter, Network, Host/Endpoint; center = the protected asset</text>
+</svg>

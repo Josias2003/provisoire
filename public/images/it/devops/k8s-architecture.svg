@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="320" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Kubernetes Architecture</text>
+
+  <rect x="30" y="45" width="540" height="230" rx="10" fill="#f7f8fa" stroke="#d5d8de" stroke-width="2"/>
+  <text x="60" y="68" font-size="13" font-weight="700" fill="#1a1d23">Cluster</text>
+
+  <rect x="60" y="80" width="220" height="175" rx="8" fill="#dbe6fc" stroke="#2f6fed" stroke-width="2"/>
+  <text x="90" y="102" font-size="13" font-weight="700" fill="#1a3a6b">Node 1</text>
+  <rect x="80" y="115" width="80" height="55" rx="6" fill="#2f6fed"/>
+  <text x="120" y="147" text-anchor="middle" font-size="12" fill="#ffffff">Pod</text>
+  <rect x="180" y="115" width="80" height="55" rx="6" fill="#2f6fed"/>
+  <text x="220" y="147" text-anchor="middle" font-size="12" fill="#ffffff">Pod</text>
+
+  <rect x="320" y="80" width="220" height="175" rx="8" fill="#dbe6fc" stroke="#2f6fed" stroke-width="2"/>
+  <text x="350" y="102" font-size="13" font-weight="700" fill="#1a3a6b">Node 2</text>
+  <rect x="340" y="115" width="80" height="55" rx="6" fill="#2f6fed"/>
+  <text x="380" y="147" text-anchor="middle" font-size="12" fill="#ffffff">Pod</text>
+  <rect x="440" y="115" width="80" height="55" rx="6" fill="#2f6fed"/>
+  <text x="480" y="147" text-anchor="middle" font-size="12" fill="#ffffff">Pod</text>
+
+  <text x="300" y="298" text-anchor="middle" font-size="13" fill="#666">Which level directly contains the Pods?</text>
+</svg>

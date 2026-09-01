@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="260" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Git Branch and Merge</text>
+
+  <!-- main line -->
+  <line x1="60" y1="100" x2="540" y2="100" stroke="#1a1d23" stroke-width="3"/>
+  <text x="60" y="85" font-size="13" font-weight="600" fill="#1a1d23">main</text>
+
+  <!-- feature branch curve -->
+  <path d="M220,100 C 260,180 360,180 420,100" fill="none" stroke="#2f6fed" stroke-width="3"/>
+  <text x="320" y="205" text-anchor="middle" font-size="13" font-weight="600" fill="#2f6fed">feature/login</text>
+
+  <!-- commits on main -->
+  <circle cx="120" cy="100" r="9" fill="#1a1d23"/>
+  <circle cx="220" cy="100" r="9" fill="#1a1d23"/>
+  <circle cx="420" cy="100" r="9" fill="#2f6fed" stroke="#1a1d23" stroke-width="2"/>
+  <circle cx="500" cy="100" r="9" fill="#1a1d23"/>
+
+  <!-- commits on feature branch -->
+  <circle cx="270" cy="150" r="9" fill="#2f6fed"/>
+  <circle cx="330" cy="165" r="9" fill="#2f6fed"/>
+  <circle cx="380" cy="150" r="9" fill="#2f6fed"/>
+
+  <text x="420" y="80" text-anchor="middle" font-size="12" fill="#666">merge commit</text>
+</svg>

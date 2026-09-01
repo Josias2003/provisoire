@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="260" fill="#ffffff"/>
+  <text x="300" y="24" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Gitflow Branching Model</text>
+
+  <!-- main line -->
+  <line x1="60" y1="60" x2="540" y2="60" stroke="#1a1d23" stroke-width="3"/>
+  <text x="60" y="46" font-size="12.5" font-weight="600" fill="#1a1d23">main</text>
+
+  <!-- develop line -->
+  <line x1="100" y1="120" x2="540" y2="120" stroke="#2f6fed" stroke-width="3"/>
+  <text x="100" y="106" font-size="12.5" font-weight="600" fill="#2f6fed">develop</text>
+
+  <!-- feature branch -->
+  <path d="M220,120 C 250,175 320,175 350,120" fill="none" stroke="#9aa3b2" stroke-width="2.5"/>
+  <text x="285" y="192" text-anchor="middle" font-size="12" fill="#666">feature/x</text>
+
+  <!-- release branch bridging develop and main -->
+  <path d="M430,120 C 450,90 450,90 470,60" fill="none" stroke="#a9c6f9" stroke-width="2.5"/>
+  <text x="500" y="90" text-anchor="middle" font-size="12" fill="#666">release/1.2</text>
+
+  <!-- commits -->
+  <circle cx="100" cy="60" r="7" fill="#1a1d23"/>
+  <circle cx="470" cy="60" r="8" fill="#2f6fed" stroke="#1a1d23" stroke-width="2"/>
+  <circle cx="100" cy="120" r="7" fill="#2f6fed"/>
+  <circle cx="220" cy="120" r="7" fill="#2f6fed"/>
+  <circle cx="350" cy="120" r="7" fill="#2f6fed"/>
+  <circle cx="430" cy="120" r="7" fill="#a9c6f9" stroke="#2f6fed" stroke-width="2"/>
+  <circle cx="290" cy="163" r="6" fill="#9aa3b2"/>
+
+  <text x="300" y="235" text-anchor="middle" font-size="13" fill="#666">The highlighted commit on 'main' came from merging which branch?</text>
+</svg>

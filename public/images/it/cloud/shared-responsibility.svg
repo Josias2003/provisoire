@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="320" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Shared Responsibility Model (IaaS)</text>
+
+  <rect x="40" y="50" width="255" height="230" rx="10" fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+  <text x="167" y="80" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Cloud Provider</text>
+  <text x="167" y="115" text-anchor="middle" font-size="12.5" fill="#e8eefd">Physical data center security</text>
+  <text x="167" y="140" text-anchor="middle" font-size="12.5" fill="#e8eefd">Physical hardware</text>
+  <text x="167" y="165" text-anchor="middle" font-size="12.5" fill="#e8eefd">Core networking infrastructure</text>
+  <text x="167" y="190" text-anchor="middle" font-size="12.5" fill="#e8eefd">Hypervisor</text>
+
+  <rect x="305" y="50" width="255" height="230" rx="10" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="432" y="80" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1d23">Customer</text>
+  <text x="432" y="115" text-anchor="middle" font-size="12.5" fill="#1a1d23">Guest OS patching</text>
+  <text x="432" y="140" text-anchor="middle" font-size="12.5" fill="#1a1d23">Application configuration</text>
+  <text x="432" y="165" text-anchor="middle" font-size="12.5" fill="#1a1d23">Data</text>
+  <text x="432" y="190" text-anchor="middle" font-size="12.5" fill="#1a1d23">Identity &amp; access management</text>
+
+  <text x="300" y="305" text-anchor="middle" font-size="13" fill="#666">Which side is responsible for patching the guest OS?</text>
+</svg>

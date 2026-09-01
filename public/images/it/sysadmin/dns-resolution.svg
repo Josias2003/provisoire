@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="220" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">DNS Resolution Order</text>
+
+  <g font-size="12">
+    <rect x="15" y="70" width="115" height="50" rx="8" fill="#eef0f3" stroke="#d5d8de"/>
+    <text x="72" y="99" text-anchor="middle" fill="#1a1d23">Client resolver</text>
+
+    <rect x="155" y="70" width="115" height="50" rx="8" fill="#eef0f3" stroke="#d5d8de"/>
+    <text x="212" y="99" text-anchor="middle" fill="#1a1d23">Root server</text>
+
+    <rect x="295" y="70" width="115" height="50" rx="8" fill="#2f6fed" stroke="#255bc4"/>
+    <text x="352" y="99" text-anchor="middle" fill="#ffffff">TLD server (.com)</text>
+
+    <rect x="435" y="70" width="150" height="50" rx="8" fill="#eef0f3" stroke="#d5d8de"/>
+    <text x="510" y="93" text-anchor="middle" fill="#1a1d23">Authoritative</text>
+    <text x="510" y="108" text-anchor="middle" fill="#1a1d23">name server</text>
+  </g>
+
+  <g stroke="#9aa3b2" stroke-width="2.5" marker-end="url(#a10)">
+    <line x1="130" y1="95" x2="153" y2="95"/>
+    <line x1="270" y1="95" x2="293" y2="95"/>
+    <line x1="410" y1="95" x2="433" y2="95"/>
+  </g>
+  <defs>
+    <marker id="a10" markerWidth="10" markerHeight="10" refX="4" refY="5" orient="auto">
+      <path d="M0,0 L8,5 L0,10 z" fill="#9aa3b2"/>
+    </marker>
+  </defs>
+
+  <text x="300" y="160" text-anchor="middle" font-size="13" fill="#666">Which server (highlighted) is queried immediately after the root server?</text>
+</svg>

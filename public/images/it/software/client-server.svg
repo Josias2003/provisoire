@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="600" height="220" fill="#ffffff"/>
+  <text x="300" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1d23">Web Request Lifecycle</text>
+
+  <rect x="50" y="80" width="140" height="60" rx="8" fill="#eef0f3" stroke="#d5d8de" stroke-width="2"/>
+  <text x="120" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1d23">Browser</text>
+
+  <rect x="410" y="80" width="140" height="60" rx="8" fill="#2f6fed" stroke="#255bc4" stroke-width="2"/>
+  <text x="480" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Web Server</text>
+
+  <line x1="190" y1="95" x2="405" y2="95" stroke="#9aa3b2" stroke-width="2.5" marker-end="url(#a7)"/>
+  <text x="300" y="85" text-anchor="middle" font-size="13" fill="#666">1. HTTP GET request</text>
+
+  <line x1="410" y1="130" x2="195" y2="130" stroke="#9aa3b2" stroke-width="2.5" marker-end="url(#a7)"/>
+  <text x="300" y="155" text-anchor="middle" font-size="13" fill="#666">2. HTTP response (HTML)</text>
+
+  <defs>
+    <marker id="a7" markerWidth="10" markerHeight="10" refX="4" refY="5" orient="auto">
+      <path d="M0,0 L8,5 L0,10 z" fill="#9aa3b2"/>
+    </marker>
+  </defs>
+</svg>

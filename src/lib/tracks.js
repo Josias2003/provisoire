@@ -19,7 +19,7 @@ export const TRACKS = [
     examTotal: 20,
     passMark: 14, // ~70%, a common certification-style pass bar
     hasLanguages: false,
-    hasImages: false,
+    hasImages: true,
     hasLawNotice: false,
     references: [
       { label: 'IANA Service Name and Transport Protocol Port Number Registry', url: 'https://www.iana.org/assignments/service-names-port-numbers' },
@@ -36,7 +36,7 @@ export const TRACKS = [
     examTotal: 20,
     passMark: 14,
     hasLanguages: false,
-    hasImages: false,
+    hasImages: true,
     hasLawNotice: false,
     references: [
       { label: 'OWASP Top 10', url: 'https://owasp.org/Top10/' },
@@ -53,7 +53,7 @@ export const TRACKS = [
     examTotal: 20,
     passMark: 14,
     hasLanguages: false,
-    hasImages: false,
+    hasImages: true,
     hasLawNotice: false,
     references: [
       { label: 'CompTIA A+ (220-1101/1102) official exam objectives', url: 'https://www.comptia.org/certifications/a' },
@@ -69,7 +69,7 @@ export const TRACKS = [
     examTotal: 20,
     passMark: 14,
     hasLanguages: false,
-    hasImages: false,
+    hasImages: true,
     hasLawNotice: false,
     references: [
       { label: 'MDN Web Docs (HTML, CSS, JavaScript, HTTP)', url: 'https://developer.mozilla.org/' },
@@ -85,7 +85,7 @@ export const TRACKS = [
     examTotal: 20,
     passMark: 14,
     hasLanguages: false,
-    hasImages: false,
+    hasImages: true,
     hasLawNotice: false,
     references: [
       { label: 'AWS - What Is Cloud Computing?', url: 'https://aws.amazon.com/what-is-cloud-computing/' },
@@ -102,7 +102,7 @@ export const TRACKS = [
     examTotal: 20,
     passMark: 14,
     hasLanguages: false,
-    hasImages: false,
+    hasImages: true,
     hasLawNotice: false,
     references: [
       { label: 'PostgreSQL official documentation', url: 'https://www.postgresql.org/docs/' },
@@ -119,7 +119,7 @@ export const TRACKS = [
     examTotal: 20,
     passMark: 14,
     hasLanguages: false,
-    hasImages: false,
+    hasImages: true,
     hasLawNotice: false,
     references: [
       { label: 'Microsoft Learn - Windows Server documentation', url: 'https://learn.microsoft.com/windows-server/' },
@@ -136,7 +136,7 @@ export const TRACKS = [
     examTotal: 20,
     passMark: 14,
     hasLanguages: false,
-    hasImages: false,
+    hasImages: true,
     hasLawNotice: false,
     references: [
       { label: 'Docker official documentation', url: 'https://docs.docker.com/' },
